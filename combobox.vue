@@ -12,25 +12,30 @@
 
   export default {
     extends: base,
-    props: ['caption', 'value', 'options', 'disabled', 'width'],
+    props: ['caption', 'value', 'options', 'disabled', 'width', 'canEdit'],
+    data() {
+      return {
+        instance: {}
+      }
+    },
     mounted: function () {
       let self = this
-      this.jQuery(this.$el).find('#field').dxSelectBox({
+      this.instance = this.jQuery(this.$el).find('#field').dxSelectBox({
         displayExpr: 'text',
         valueExpr: 'value',
         disabled: self.disabled,
         items: self.options,
+        value: self.value,
         width: self.width,
+        acceptCustomValue: this.canEdit === true,
         readOnly: false,
         onValueChanged: function (e) {
-          self.compValue = e.value
           self.$emit('input', e.value)
         }
       })
     },
     watch: {
       value: function (val) {
-        if (val === self.compValue) return
         this.jQuery(this.$el).find('#field').dxSelectBox({
           value: val
         })

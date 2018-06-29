@@ -17,6 +17,10 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      value: {
+        type: Boolean,
+        default: false
       }
     },
     mounted: function () {

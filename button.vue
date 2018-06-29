@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="button"></div>
+    <div id="button" class="f-button"></div>
   </div>
 </template>
 
@@ -21,14 +21,21 @@
       icon: {
         type: String,
         default: ''
+      },
+      width: {
+        default: 'auto'
+      },
+      type: {
+        default: 'default'
       }
     },
     mounted: function () {
       let self = this
       this.jQuery(this.$el).find('#button').dxButton({
         text: self.caption,
-        type: 'default',
+        type: self.type,
         icon: self.icon,
+        width: self.width,
         disabled: self.disabled,
         onClick: function (e) {
           self.$emit('click', e.value)
@@ -44,3 +51,9 @@
     }
   }
 </script>
+
+<style scoped>
+  .f-button {
+    margin: 5px 3px 3px 3px;
+  }
+</style>
